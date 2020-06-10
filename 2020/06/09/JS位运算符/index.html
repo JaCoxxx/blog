@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="JS位运算符"><meta name="keywords" content="es6,原生"><meta name="author" content="JaCo Wu"><meta name="copyright" content="JaCo Wu"><title>JS位运算符 | JaCo Wu的博客</title><link rel="shortcut icon" href="https://jacokwu.cn/images/public/author.jpg"><link rel="stylesheet" href="/blog/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66455669";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过程"><span class="toc-number">2.</span> <span class="toc-text">过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#移位运算符"><span class="toc-number">2.1.</span> <span class="toc-text">移位运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-lt"><span class="toc-number">2.1.1.</span> <span class="toc-text">&lt;&lt;</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#正数的无符号左移位运算"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">正数的无符号左移位运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#负数的无符号左移位运算"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">负数的无符号左移位运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#拓展"><span class="toc-number">2.1.1.3.</span> <span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gt-gt"><span class="toc-number">2.1.2.</span> <span class="toc-text">&gt;&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#正数的有符号右移位运算"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">正数的有符号右移位运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#负数的有符号右移位运算"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">负数的有符号右移位运算</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gt-gt-gt"><span class="toc-number">2.1.3.</span> <span class="toc-text">&gt;&gt;&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#正数无符号右移位运算"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">正数无符号右移位运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#负数无符号右移位运算"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">负数无符号右移位运算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑位运算符"><span class="toc-number">2.2.</span> <span class="toc-text">逻辑位运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#amp"><span class="toc-number">2.2.1.</span> <span class="toc-text">&amp;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">2.2.2.</span> <span class="toc-text">|</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">^</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-2"><span class="toc-number">2.2.4.</span> <span class="toc-text">~</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://jacokwu.cn/images/public/author.jpg"></div><div class="author-info__name text-center">JaCo Wu</div><div class="author-info__description text-center">一个默默无闻的前端攻城狮</div><div class="follow-button"><a href="https://github.com/JaCoxxx/JaCoxxx.github.io">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/blog/archives"><span class="pull-left">文章</span><span class="pull-right">22</span></a><a class="author-info-articles__tags article-meta" href="/blog/tags"><span class="pull-left">标签</span><span class="pull-right">32</span></a><a class="author-info-articles__categories article-meta" href="/blog/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">大佬博客</div><a class="author-info-links__name text-center" href="http://www.wclimb.site">wclimb</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://jacokwu.cn/images/public/background.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/blog/">JaCo Wu的博客</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/blog">首页</a><a class="site-page" href="/blog/archives">归档</a><a class="site-page" href="/blog/tags">标签</a><a class="site-page" href="/blog/gallery">相册</a><a class="site-page" href="/blog/categories">分类</a></span></div><div id="post-info"><div id="post-title">JS位运算符</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-06-09</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/blog/categories/js/">js</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">3.2k</span><span class="post-meta__separator">|</span><span>阅读时长: 12 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>之前对js的一些涉及到二进制的运算符一直似懂非懂，看到了就一脸懵逼，还得去控制台算一下。然后最近看算法的时候又看到了这个运算符，这里就简单介绍一下学习这些位运算符的过程。<br>注意：<strong>以下运算均不涉及到小数。</strong></p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="移位运算符"><a href="#移位运算符" class="headerlink" title="移位运算符"></a>移位运算符</h3><h4 id="lt-lt"><a href="#lt-lt" class="headerlink" title="&lt;&lt;"></a>&lt;&lt;</h4><blockquote>
+<p>“&lt;&lt;”运算符执行无符号左移位运算。在移位运算过程中，符号位始终保持不变。如果右侧空出位置，则自动填充为 0；超出 32 位的值，则自动丢弃。</p>
+</blockquote>
+<p>先说这句话是什么意思。左移位是二进制的一种运算，就是在不改变二进制数值32位长度的前提下，将每位的数字都向左移动，左边移出去的直接丢弃，右边空出来的位置用0填充。无符号就是保持符号位不变，即本来是正数，移位后一样为正数。</p>
+<h5 id="正数的无符号左移位运算"><a href="#正数的无符号左移位运算" class="headerlink" title="正数的无符号左移位运算"></a>正数的无符号左移位运算</h5><p>这里以 <code>7 &lt;&lt; 2</code> 为例。</p>
+<p>首先将7转为二进制是 <code>0000 0000 0000 0000  0000 0000 0000 0111</code>.<br>然后对其向左移两位.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">            0000 0000 0000 0000  0000 0000 0000 0111    --&gt; 7</span><br><span class="line">                                                </span><br><span class="line">&lt;&lt; 2     00 0000 0000 0000 0000  0000 0000 0001 11      --&gt; 左边超出部分移除，坐标填充0</span><br><span class="line">----------------------------------------------------</span><br><span class="line">=           0000 0000 0000 0000  0000 0000 0001 1100    --&gt; 28</span><br></pre></td></tr></table></figure>
+
+<p>得到值为 <code>0000 0000 0000 0000  0000 0000 0001 1100</code>.<br>转换为十进制为 28.即 <code>7 &lt;&lt; 2 = 28</code>。</p>
+<p>然后我们对以上的运算过程做一个处理，将这些二进制转换为我们熟悉的十进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">            0000 0000 0000 0000  0000 0000 0000 0111 = 2^2 + 2^1 + 2^0 = 7</span><br><span class="line">&lt;&lt; 2     00 0000 0000 0000 0000  0000 0000 0001 1100 = 2^4 + 2^3 + 2^2 = 28</span><br></pre></td></tr></table></figure>
+
+<p>对移位后的算式进行合并项可得到 <code>2^4 + 2^3 + 2^2 = (2^2 + 2^1 + 2^0) * 2^2</code>，即 <code>2^4 + 2^3 + 2^2 = (2^2 + 2^1 + 2^0) * 2^2 = 7 * 2^2</code>。由此我们可得出 <code>7 &lt;&lt; 2 = 7 * 2^2 = 28</code>。<br>我们通过计算几个简单的左移位运算，与标准答案进行比较，验证一下这个结论。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 &lt;&lt; 1 = 4 * 2^1 = 8</span><br><span class="line">12 &lt;&lt; 1 = 12 * 2^1 = 24</span><br><span class="line">66 &lt;&lt; 3 = 66 * 2^3 = 528</span><br><span class="line">100 &lt;&lt; 5 = 100 * 2^5 = 3200</span><br><span class="line">9999 &lt;&lt; 6 = 9999 * 2^6 = 639936</span><br></pre></td></tr></table></figure>
+
+<p>在控制台中以上几个算式的结果为</p>
+<p><img src="https://jacokwu.cn/images/blog/operator-left.png" alt="控制台左移位运算"></p>
+<p>答案完全一致。说明我们的结论是正确的。当然这个结论<strong>仅限于那些二进制移位不会左移移出的数字的简单运算</strong>。当我们遇到一些简单的可以口算的左移位运算时就可以使用这个结论快速得到结果，如果对于 <code>99999 &lt;&lt; 66</code> 这种较复杂的运算你也用这个结论计算，也没有人会介意。</p>
+<h5 id="负数的无符号左移位运算"><a href="#负数的无符号左移位运算" class="headerlink" title="负数的无符号左移位运算"></a>负数的无符号左移位运算</h5><p>下面我们看一下负数的左移位运算。以 <code>-66 &lt;&lt; 2</code> 为例。<br>首先，我们先复习一下负数如何转换为二进制。<br>负数转换为二进制的步骤有三：</p>
+<ol>
+<li>确定负数对应正数的二进制</li>
+<li>求第一步得到的二进制的反码</li>
+<li>第二步得到的二进制加一</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-66</span><br><span class="line">    66      -&gt; 0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">    反码    -&gt; 1111 1111 1111 1111  1111 1111 1011 1101</span><br><span class="line">    +1      -&gt; 1111 1111 1111 1111  1111 1111 1011 1110</span><br></pre></td></tr></table></figure>
+
+<p>然后对其向左移两位.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">            1111 1111 1111 1111  1111 1111 1011 1110    --&gt; -66</span><br><span class="line"></span><br><span class="line">&lt;&lt; 2     11 1111 1111 1111 1111  1111 1110 1111 10      --&gt; 左边超出部分移除，坐标填充0</span><br><span class="line">----------------------------------------------------</span><br><span class="line">=           1111 1111 1111 1111  1111 1110 1111 1000    --&gt; 28</span><br></pre></td></tr></table></figure>
+
+<p>得到值为 <code>1111 1111 1111 1111  1111 1110 1111 1000</code>.然后我们将其转换成十进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1111 1111 1111 1111  1111 1110 1111 1000</span><br><span class="line">    -1     -&gt; 1111 1111 1111 1111  1111 1110 1111 0111</span><br><span class="line">    反码   -&gt; 0000 0000 0000 0000 0000 0001 0000 1000</span><br><span class="line">    转换   -&gt; -264                                       --&gt; 别忘了带符号</span><br></pre></td></tr></table></figure>
+
+<p>转换为十进制为 -264.即 <code>-66 &lt;&lt; 2 = -264</code>。</p>
+<h5 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h5><ol>
+<li>拓展1</li>
+</ol>
+<p>刚刚我们计算 -66 的二进制得到的是 <code>1111 1111 1111 1111  1111 1111 1011 1110</code>。我们在控制台验证一下我们得到的这个二进制。<br><img src="https://jacokwu.cn/images/blog/operator-left2.png" alt="-66的二进制表示"><br>欸，这差距有点大呀。是我们算的不对吗？肯定不是。是因为js的引擎在做处理的时候是先按无符号数字进行处理，转换完了才会加上符号。所以 -66 的二进制应该是先得出66的二进制，然后加上负号，就得到了 <code>-1000010</code>。</p>
+<ol start="2">
+<li>拓展2</li>
+</ol>
+<p>我们比较一下下面几个算式。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">33 &lt;&lt; 2 = 132</span><br><span class="line">-33 &lt;&lt; 2 = -132</span><br><span class="line">66 &lt;&lt; 2 = 264</span><br><span class="line">-66 &lt;&lt; 2 = -264</span><br><span class="line">999 &lt;&lt; 2 = 3996</span><br><span class="line">-999 &lt;&lt; 2 = -3996</span><br></pre></td></tr></table></figure>
+
+<p>是的没错，进行无符号左移位运算时，当两个数的绝对值相等时，其相同位数的移位的绝对值一定相等。</p>
+<h4 id="gt-gt"><a href="#gt-gt" class="headerlink" title="&gt;&gt;"></a>&gt;&gt;</h4><blockquote>
+<p>“&gt;&gt;”运算符执行<strong>有符号</strong>右移位运算。与左移运算操作相反，它把 32 位数字中的所有有效位整体右移，再使用符号位的值填充空位。移动过程中超出的值将被丢弃。</p>
+</blockquote>
+<h5 id="正数的有符号右移位运算"><a href="#正数的有符号右移位运算" class="headerlink" title="正数的有符号右移位运算"></a>正数的有符号右移位运算</h5><p>这里以 <code>666 &gt;&gt; 3</code> 为例。</p>
+<p>首先将666转换为二进制是 <code>0000 0000 0000 0000  0000 0010 1001 1010</code>。<br>然后对其向右移三位。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        0000 0000 0000 0000  0000 0010 1001 1010        --&gt; 666</span><br><span class="line">                                                </span><br><span class="line">&gt;&gt; 3       0 0000 0000 0000  0000 0000 0101 0011 010    --&gt; 因为是正数所以左边填充0，右边超出部分移除</span><br><span class="line">------------------------------------------------</span><br><span class="line">=       0000 0000 0000 0000  0000 0000 0101 0011        --&gt; 83</span><br></pre></td></tr></table></figure>
+
+<p>得到值为 <code>0000 0000 0000 0000  0000 0000 0101 0011</code>.<br>转换为十进制为 83.即 <code>666 &gt;&gt; 3 = 83</code>。</p>
+<p>然后我们对以上的运算过程做一个处理，将这些二进制转换为我们熟悉的十进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        0000 0000 0000 0000  0000 0010 1001 1010        = 2^9 + 2^7 + 2^4 + 2^3 + 2^1 = 666</span><br><span class="line">&gt;&gt; 3       0 0000 0000 0000  0000 0000 0101 0011 010    = 2^6 + 2^4 + 2^1 + 2^0       = 28</span><br></pre></td></tr></table></figure>
+
+<p>这个规律好像不太好总结？</p>
+<h5 id="负数的有符号右移位运算"><a href="#负数的有符号右移位运算" class="headerlink" title="负数的有符号右移位运算"></a>负数的有符号右移位运算</h5><p>这里以 <code>-666 &gt;&gt; 3</code>为例。</p>
+<p>因为是有符号的运算，所以这里不再适用上一小节说的js的特殊处理。先将-666转换为二进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-666</span><br><span class="line">    666     -&gt; 0000 0000 0000 0000  0000 0010 1001 1010</span><br><span class="line">    反码    -&gt; 1111 1111 1111 1111  1111 1101 0110 0101</span><br><span class="line">    +1      -&gt; 1111 1111 1111 1111  1111 1101 0110 0110</span><br></pre></td></tr></table></figure>
+
+<p>即-666的二进制形式为 <code>1111 1111 1111 1111  1111 1101 0110 0110</code>，然后对其进行有符号右移位运算</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        1111 1111 1111 1111  1111 1101 0110 0110        --&gt; -666</span><br><span class="line">                                                </span><br><span class="line">&gt;&gt; 3       1 1111 1111 1111  1111 1111 1010 1100 110    --&gt; 因为是负数所以左边填充1，右边超出部分移除</span><br><span class="line">------------------------------------------------</span><br><span class="line">=       1111 1111 1111 1111  1111 1111 1010 1100        --&gt; -84</span><br></pre></td></tr></table></figure>
+
+<p>移位后得到的值为 <code>1111 1111 1111 1111  1111 1111 1010 1100</code>，是一个负值，我们将其转成十进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1111 1111 1111 1111  1111 1111 1010 1100</span><br><span class="line">    -1     -&gt; 1111 1111 1111 1111  1111 1111 1010 1011</span><br><span class="line">    反码   -&gt; 0000 0000 0000 0000 0000 0000 0101 0100</span><br><span class="line">    转换   -&gt; -84                                       --&gt; 别忘了带符号</span><br></pre></td></tr></table></figure>
+
+<p>我们对此结果进行验证。</p>
+<p><img src="https://jacokwu.cn/images/blog/operator-right2.png" alt="控制台有符号右移位运算验证"></p>
+<p>可见，我们的运算是完全正确的。</p>
+<h4 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="&gt;&gt;&gt;"></a>&gt;&gt;&gt;</h4><blockquote>
+<p>“&gt;&gt;&gt;”运算符执行无符号右移位运算。它把无符号的 32 位整数所有效位整体右移。对于无符号数或正数右移运算，无符号右移与有符号右移运算的结果是相同的。</p>
+</blockquote>
+<h5 id="正数无符号右移位运算"><a href="#正数无符号右移位运算" class="headerlink" title="正数无符号右移位运算"></a>正数无符号右移位运算</h5><p>这里我们以 <code>666 &gt;&gt;&gt; 3</code>为例。</p>
+<p>首先将666转换为二进制是 <code>0000 0000 0000 0000  0000 0010 1001 1010</code>。<br>然后对其向右移三位。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        0000 0000 0000 0000  0000 0010 1001 1010        --&gt; 666</span><br><span class="line">                                                </span><br><span class="line">&gt;&gt; 3       0 0000 0000 0000  0000 0000 0101 0011 010    --&gt; 左边空出部分填充0，右边超出部分移除</span><br><span class="line">------------------------------------------------</span><br><span class="line">=       0000 0000 0000 0000  0000 0000 0101 0011        --&gt; 83</span><br></pre></td></tr></table></figure>
+
+<p>得到值为 <code>0000 0000 0000 0000  0000 0000 0101 0011</code>.<br>转换为十进制为 83.即 <code>666 &gt;&gt; 3 = 83</code>。</p>
+<h5 id="负数无符号右移位运算"><a href="#负数无符号右移位运算" class="headerlink" title="负数无符号右移位运算"></a>负数无符号右移位运算</h5><p>这里以 <code>-666 &gt;&gt; 3</code>为例。</p>
+<p>因为是有符号的运算，所以这里不再适用上一小节说的js的特殊处理。先将-666转换为二进制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-666</span><br><span class="line">    666     -&gt; 0000 0000 0000 0000  0000 0010 1001 1010</span><br><span class="line">    反码    -&gt; 1111 1111 1111 1111  1111 1101 0110 0101</span><br><span class="line">    +1      -&gt; 1111 1111 1111 1111  1111 1101 0110 0110</span><br></pre></td></tr></table></figure>
+
+<p>即-666的二进制形式为 <code>1111 1111 1111 1111  1111 1101 0110 0110</code>，然后对其进行有符号右移位运算</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        1111 1111 1111 1111  1111 1101 0110 0110        --&gt; -666</span><br><span class="line">                                                </span><br><span class="line">&gt;&gt; 3       1 1111 1111 1111  1111 1111 1010 1100 110    --&gt; 左边空出部分填充0，右边超出部分移除</span><br><span class="line">------------------------------------------------</span><br><span class="line">=       0001 1111 1111 1111  1111 1111 1010 1100        --&gt; 536870828</span><br></pre></td></tr></table></figure>
+
+<p>移位后得到的值为 <code>0001 1111 1111 1111  1111 1111 1010 1100</code>，转成十进制为536870828。<br>是不是超级大。因为是无符号右移位运算，所以在左边空出部分不论正负都会填充0.</p>
+<p>我们对此结果进行验证。</p>
+<p><img src="https://jacokwu.cn/images/blog/operator-right3.png" alt="控制台无符号右移位运算验证"></p>
+<p>可见，我们的运算是完全正确的。</p>
+<p>注意：因为对负数进行无符号右移位运算时，所得结果很大，所以在使用过程中需要格外注意。</p>
+<p>疑问：左移位和右移位根本都是只对位置进行了移动，那么对于 <code>x1 &gt;&gt; k = y1</code> 和 <code>y2 &lt;&lt; k = x2</code> 中的 <code>x1</code> 等于 <code>x2</code>，<code>y1</code> 等于 <code>y2</code> 吗？</p>
+<p>不一定。因为我们不能确保移动过程中被丢弃的值均为0。但凡有一个1被丢弃，就不会相等。而如果被丢弃的都是0，那么 <code>x1 === x2 y1 === y2</code>。如下图所示。</p>
+<p><img src="https://jacokwu.cn/images/blog/operator-right.png" alt="控制台左右移位运算比较"></p>
+<h3 id="逻辑位运算符"><a href="#逻辑位运算符" class="headerlink" title="逻辑位运算符"></a>逻辑位运算符</h3><h4 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h4><blockquote>
+<p>“&amp;”运算符（位与）用于对两个二进制操作数逐位进行比较，并根据下表所示的换算表返回结果。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>第一个数的位值</th>
+<th>第二个数的位值</th>
+<th>运算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>这里以 <code>66 &amp; 33</code> 为例。</p>
+<p>首先将两个数转换为二进制是 <code>0000 0000 0000 0000  0000 0000 0100 0010</code> 和 <code>0000 0000 0000 0000  0000 0000 0010 0001</code>。<br>然后对其进行与运算。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">&amp;   0000 0000 0000 0000  0000 0000 0010 0001</span><br><span class="line">--------------------------------------------    --&gt; 按上述表格进行运算</span><br><span class="line">    0000 0000 0000 0000  0000 0000 0000 0000    --&gt; 0</span><br></pre></td></tr></table></figure>
+
+<p>得出结果为 0.</p>
+<p>负数的与运算与正数并无区别，不做讨论。</p>
+<h4 id><a href="#" class="headerlink" title="|"></a>|</h4><blockquote>
+<p>“|”运算符（位或）用于对两个二进制操作数逐位进行比较，并根据如表格所示的换算表返回结果。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>第一个数的位值</th>
+<th>第二个数的位值</th>
+<th>运算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>这里以 <code>66 | 66</code> 为例。</p>
+<p>首先将两个数转换为二进制是 <code>0000 0000 0000 0000  0000 0000 0100 0010</code> 和 <code>0000 0000 0000 0000  0000 0000 0100 0010</code>。<br>然后对其进行与运算。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">|   0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">--------------------------------------------    --&gt; 按上述表格进行运算</span><br><span class="line">    0000 0000 0000 0000  0000 0000 0100 0010    --&gt; 66</span><br></pre></td></tr></table></figure>
+
+<p>得出结果为 66.</p>
+<p>负数的与运算与正数并无区别，不做讨论。</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title="^"></a>^</h4><blockquote>
+<p>“^”运算符（位异或）用于对两个二进制操作数逐位进行比较，并根据如表格所示的换算表返回结果。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>第一个数的位值</th>
+<th>第二个数的位值</th>
+<th>运算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>这里以 <code>66 ^ 66</code> 为例。</p>
+<p>首先将两个数转换为二进制是 <code>0000 0000 0000 0000  0000 0000 0100 0010</code> 和 <code>0000 0000 0000 0000  0000 0000 0100 0010</code>。<br>然后对其进行与运算。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">|   0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">--------------------------------------------    --&gt; 按上述表格进行运算</span><br><span class="line">    0000 0000 0000 0000  0000 0000 0000 0000    --&gt; 0</span><br></pre></td></tr></table></figure>
+
+<p>得出结果为 0.</p>
+<p>负数的与运算与正数并无区别，不做讨论。</p>
+<h4 id="-2"><a href="#-2" class="headerlink" title="~"></a>~</h4><blockquote>
+<p>“~”运算符（位非）用于对一个二进制操作数逐位进行取反操作。</p>
+</blockquote>
+<p>这里以 <code>~66</code> 为例。</p>
+<p>首先将其转换为二进制是 <code>0000 0000 0000 0000  0000 0000 0100 0010</code>。<br>然后对其进行与运算。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~   0000 0000 0000 0000  0000 0000 0100 0010</span><br><span class="line">--------------------------------------------    --&gt; 对每一位都进行取反操作</span><br><span class="line">    1111 1111 1111 1111  1111 1111 1011 1101    --&gt; -67</span><br></pre></td></tr></table></figure>
+
+<p>将结果（<code>1111 1111 1111 1111  1111 1111 1011 1101</code>）转换为十进制</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1111 1111 1111 1111  1111 1111 1011 1101</span><br><span class="line">    -1     -&gt; 1111 1111 1111 1111  1111 1111 1011 1100</span><br><span class="line">    反码   -&gt; 0000 0000 0000 0000  0000 0000 0100 0011</span><br><span class="line">    转换   -&gt; -67                                       --&gt; 别忘了符号</span><br></pre></td></tr></table></figure>
+
+<p>得出结果为 -67.</p>
+<p>这里我们再我看几个例子。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~2 = -3</span><br><span class="line">~10 = -11</span><br><span class="line">~66 = -67</span><br><span class="line">~99 = -100</span><br><span class="line">~-99 = 98</span><br></pre></td></tr></table></figure>
+
+<p>从中我们可以看出，<strong>位非操作就是对数字加一，然后取负</strong>。我们可以写个简单的判断方法来验证。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">judgeResult</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ~num === -(num + <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">judgeResult() <span class="comment">// false</span></span><br><span class="line">judgeResult(<span class="number">10</span>) <span class="comment">// true</span></span><br><span class="line">judgeResult(<span class="number">1</span>) <span class="comment">// true</span></span><br><span class="line">judgeResult(<span class="number">-66</span>) <span class="comment">// true</span></span><br><span class="line">judgeResult(<span class="number">324</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>位运算符运算结果非常有趣，在平时可以多加应用，但是一定要注意可能产生大数的预算，避免产生不必要的BUG。<br>这篇文章只是做了一个简单的介绍。后面有空了会做一下在实际开发中的应用，虽然我可能很久都遇不到。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://c.biancheng.net/js/" target="_blank" rel="noopener">JavaScript学习指南：JS入门教程</a></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">JaCo Wu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jacokwu.cn/blog/2020/06/09/JS位运算符/">https://jacokwu.cn/blog/2020/06/09/JS位运算符/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jacokwu.cn/blog">JaCo Wu的博客</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/es6/">es6</a><a class="post-meta__tags" href="/blog/tags/原生/">原生</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/blog/2020/04/28/Hooks是什么？/"><span>Hooks是什么？</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '49402195632a617e3708',
+  clientSecret: '887d4bded9e50678007602a209d9191c8e2d8dbf',
+  repo: 'blog',
+  owner: 'JaCoxxx',
+  admin: 'JaCoxxx',
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(https://jacokwu.cn/images/public/background.png)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2020 By JaCo Wu</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/blog/js/utils.js?version=1.6.1"></script><script src="/blog/js/fancybox.js?version=1.6.1"></script><script src="/blog/js/sidebar.js?version=1.6.1"></script><script src="/blog/js/copy.js?version=1.6.1"></script><script src="/blog/js/fireworks.js?version=1.6.1"></script><script src="/blog/js/transition.js?version=1.6.1"></script><script src="/blog/js/scroll.js?version=1.6.1"></script><script src="/blog/js/head.js?version=1.6.1"></script><script src="/blog/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
