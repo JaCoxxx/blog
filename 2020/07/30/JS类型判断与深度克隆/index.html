@@ -140,7 +140,7 @@
 
 <p>在这段代码中，newArr是arr的复制，newStr是str的复制；但是结果是arr跟着newArr改变了。</p>
 <p>出现这种情况的原因是，在JavaScript中，普通数据类型都存在栈（栈内存）中，占用空间大小固定；引用数据类型都存在堆（堆内存）中，通过指针建立联系。而引用类型的值的复制，只是给新变量B添加了一个指针b，指向了被复制变量A的指针a所指向的内存，也就是说，B虽然是经过A复制得来，但是他们指向的始终还是同一个值，所以会一个变，另一个跟着变。如下所示。</p>
-<iframe src="https://show.zohopublic.com.cn/publish/akx8s75d8e674921945c3992fc73634c613e9" height="221" width="329" name="%E5%8F%98%E9%87%8F%E5%AD%98%E5%80%BC" scrolling="no" frameborder="0" style="border:1px solid #AABBCC" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://show.zohopublic.com.cn/publish/akx8s75d8e674921945c3992fc73634c613e9" height="442" width="100%" name="%E5%8F%98%E9%87%8F%E5%AD%98%E5%80%BC" scrolling="no" frameborder="0" style="border:1px solid #AABBCC" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 <p>为了避免这种指向同一地址，联动更改的问题，就需要用到深度克隆，使得复制出来的变量是一个全新的变量，不会对以前的变量产生其他影响。</p>
 <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p>先搭个架子。</p>
